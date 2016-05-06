@@ -19,9 +19,12 @@ import jp.co.custanet.nishihata.dto.TestDto;
 import jp.co.custanet.nishihata.service.CustaDialogService;
 import jp.co.custanet.nishihata.service.CustaNlcService;
 import jp.co.custanet.nishihata.service.DatabaseService;
+import jp.co.custanet.nishihata.util.JsonConverter;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.JsonObject;
 import com.ibm.watson.developer_cloud.dialog.v1.model.Dialog;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classification;
 import com.ibm.watson.developer_cloud.natural_language_classifier.v1.model.Classifiers;
@@ -116,13 +119,14 @@ public class MyResource {
     @GET
     @Path("dbtest")
     @Produces("application/json;charset=UTF-8")
-    public String dbtest(){
+    @Consumes("application/json;charset=UTF-8")
+    public String dbtest() throws Exception{
     	
-    	String data = "";
     	
     	List<TestDto> testlist =  dbService.getTest();
-    	
-    	return data;
+    	String jsonTest = JsonConverter.object2json(testlist);
+    			
+    	return jsonTest;
     }
 
 

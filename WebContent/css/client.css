@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 
-#div_body1 {
+.box1 {
 	        height:80px;
             width: 550px;
             border: 1px solid black;
